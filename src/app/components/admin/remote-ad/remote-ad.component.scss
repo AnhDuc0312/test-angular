@@ -1,0 +1,63 @@
+.btn {
+    border: none;
+    padding: 8px 16px;
+    // margin-top: 20px;
+    // margin-right: 40px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .btn-update {
+    margin-top: 20px;
+    margin-right: 40px;
+    background-color: #007bff;
+    color: #fff;
+    margin-right: 10px;
+  }
+  
+  .btn-delete {
+    margin-top: 20px;
+    margin-right: 40px;
+    background-color: #dc3545;
+    color: #fff;
+  }
+  .detail-row {
+    margin-bottom: 8px;
+    margin-left: 50px;
+    margin-right: 30px;
+  }
+  
+  .detail-label {
+    font-weight: bold;
+    margin-right: 30px;
+  }
+
+  /* payroll.component.css */
+
+.payroll-details {
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}

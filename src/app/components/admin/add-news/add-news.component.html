@@ -1,0 +1,15 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Add News</h2>
+    
+    <form [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <ckeditor [editor]="Editor" formControlName="content"></ckeditor>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

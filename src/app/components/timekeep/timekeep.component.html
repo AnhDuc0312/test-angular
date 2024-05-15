@@ -1,0 +1,87 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="justify-content-center">
+    <h2>Bảng chấm công</h2>
+    <div class="attendance-input">
+      <label for="typework">Loại công việc:</label>
+      <select id="typework" name="typework" [(ngModel)]="selectedTypework">
+        <option value="Onsite">Công việc thường</option>
+        <option value="Remote">Làm việc từ xa</option>
+        <option value="Overtime">Làm ngoài giờ</option>
+        <!-- Thêm các lựa chọn khác nếu cần -->
+      </select>
+      <!-- Nút để thêm bản ghi chấm công mới -->
+      <button
+        style="margin-right: 20px; margin-left: 40px; margin-bottom: 20px"
+        (click)="checkIn()"
+      >
+        Check In
+      </button>
+      <button (click)="checkOut()">Check Out</button>
+    </div>
+
+    <!-- Ô tìm kiếm theo thời gian -->
+    <div class="search-time">
+      <label for="searchDate">Tìm kiếm theo ngày:</label>
+      <input
+        type="date"
+        id="searchDate"
+        name="searchDate"
+        [(ngModel)]="searchDate"
+      />
+      <button (click)="filterByDate()">Tìm kiếm</button>
+    </div>
+
+    <!-- Bảng chấm công -->
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Mã</th>
+          <th>Nhân viên</th>
+          <th>Ngày</th>
+          <th>Loại</th>
+          <th>Thời gian vào</th>
+          <th>Thời gian ra</th>
+          <th>Thời gian làm việc</th>
+          <th>Đủ Công/Thiếu Công</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dòng dữ liệu -->
+        <tr
+          *ngFor="
+            let record of timeSheets
+              | slice
+                : (currentPage - 1) * itemsPerPage
+                : currentPage * itemsPerPage
+          "
+        >
+          <td>{{ record.code }}</td>
+          <td>{{ userResponse?.username }}</td>
+          <td>{{ parseStringToDate(record.record_date) }}</td>
+          <td>{{ record.type_work || "xxxxx"}}</td>
+          <td>{{ parseStringToDateTime(record.check_in) || "xxxxx"}}</td>
+          <td>{{ record.check_out ?parseStringToDateTime(record.check_out) : "....."}}</td>
+          <td>{{record.working_hours}}</td>
+          <td>{{ record.type_work || "xxxxx"}}</td>
+          <td>{{ record.status || "xxxxx"}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Phân trang -->
+    <div class="pagination-controls">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">
+        Previous
+      </button>
+      <span>{{ currentPage }}/{{ getTotalPages() }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === getTotalPages()">
+        Next
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

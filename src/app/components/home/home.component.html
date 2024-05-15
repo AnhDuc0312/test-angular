@@ -1,0 +1,104 @@
+
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" [attr.data-interval]="slideInterval">
+      <ol class="carousel-indicators">
+        <!-- <li *ngFor="let slide of slides; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li> -->
+      </ol>
+      <div class="carousel-inner">
+        <div *ngFor="let slide of slides; let i = index" class="carousel-item" [class.active]="i === 0">
+          <img class="d-block w-100" [src]="slide.imageUrl" [alt]="'Slide ' + (i + 1)">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="news-title">
+      <h1>NEWS</h1>
+    </div>
+    <div class="news-container">
+      <div class="row">
+        <!-- Cột đầu tiên -->
+        <div class="col-md-6 column-left">
+          <div
+            *ngFor="let newsItem of newsItemsForColumn1.slice(0, 3)"
+            class="news-items"
+          >
+            <h3>{{ newsItem.title }}</h3>
+            <p>{{ newsItem.content }}</p>
+          </div>
+        </div>
+
+        <!-- Cột thứ hai -->
+        <div class="col-md-6 column-right">
+          <div
+            *ngFor="let newsItem of newsItemsForColumn1.slice(3, 6)"
+            class="news-items"
+          >
+            <h3>{{ newsItem.title }}</h3>
+            <p>{{ newsItem.content }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Phần điều hướng trang -->
+  <div class="pagination">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    <span>{{ currentPage }} / {{ getTotalPages() }}</span>
+    <button
+      (click)="goToPage(currentPage + 1)"
+      [disabled]="currentPage === getTotalPages()"
+    >
+      Next
+    </button>
+  </div>
+</div>
+<div class="container-fluid training-section">
+  <div class="training-title">
+    <h1 style="text-align: center; padding-left : 40px;padding-right:40px;">Đào tạo</h1>
+  </div>
+  <div class="training-categories">
+    <!-- Danh mục đào tạo -->
+    <div class="category">
+      <h2 class="mb-6 mt-6" style="text-align: center;margin-bottom : 30px; ">Kỹ năng mềm</h2>
+      <div class="videos w-100 justify-content-center align-items-center">
+        <!-- Danh sách video về kỹ năng mềm -->
+        <div class=" video justify-content-center align-items-center text-center">
+          <h3 style="margin-top: 30px;">About this course</h3>
+          <video width="960" height="540" controls class="mt-6 mb-3">
+            <source src="../../../assets/video/001 About this course.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <!-- <iframe width="560" height="315" src="link_video" frameborder="0" allowfullscreen></iframe> -->
+        </div>
+        <div class=" video justify-content-center align-items-center text-center">
+          <h3 style="margin-top: 30px;">Introduction</h3>
+          <video width="960" height="540" controls class="mt-6 mb-3">
+            <source src="../../../assets/video/002 Introduction.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <!-- <iframe width="560" height="315" src="link_video" frameborder="0" allowfullscreen></iframe> -->
+        </div>
+        <!-- Thêm video khác tương tự -->
+      </div>
+      <div class="more-video justify-content-center align-items-center text-center"  >
+        <a href="/train">More video</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>

@@ -1,0 +1,53 @@
+.container-fluid {
+    background-color: white;
+    padding-left: 0 !important; /* Remove left padding */
+    padding-right: 0 !important; /* Remove right padding */
+}
+.header {
+    background-color: #333;
+    /* Header background color */
+    color: white;
+    /* Text color */
+    padding: 10px;
+    /* Add padding to the header */
+    text-align: center;
+    /* Center-align text in the header */
+    align-items: center;
+}
+#sidebar {
+    background-color: #090d11 !important; /* Primary color */
+    color: white; /* Text color */
+    height: 100vh;
+    overflow-y: auto; /* Add scrollbars if content overflows */
+    
+}
+/* Custom CSS for sidebar links */
+
+
+#sidebar a {
+    color: white; 
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+    padding: 10px 15px; 
+    padding-right: 0;
+}
+
+#sidebar a.active {
+    font-weight: bold; 
+}
+
+#sidebar a:hover {
+    background-color: rgb(25, 26, 27);
+}
+.icon {
+    padding: 5px;
+}
+.nav-item {
+    cursor: pointer;
+}
+.badge-danger {
+    background-color: #dc3545; /* Màu đỏ của Bootstrap */
+}
+.btn-danger{
+    width: 70px;
+    height: 35px;
+}

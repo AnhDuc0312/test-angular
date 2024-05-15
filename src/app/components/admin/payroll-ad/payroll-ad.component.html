@@ -1,0 +1,161 @@
+<div class="container pt-5">
+  <!-- Tính lương button -->
+  <div class="row justify-content-end mb-5">
+    <div class="col-auto">
+      <button class="btn btn-success" ng-click="calculateSalary()">
+        Tính lương
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- search -->
+          <form ng-submit="search()">
+            <div class="row">
+              <div class="col-md-10 offset-md-1">
+                <div class="row">
+                  <!-- from date -->
+                  <div class="col-2">
+                    <div class="form-group">
+                      <label for="month">Thời gian</label>
+                      <div class="input-group">
+                        <input
+                          type="month"
+                          id="month"
+                          ng-model="searchParams.time"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- search button -->
+                  <div class="col-1">
+                    <div class="form-group">
+                      <label>&nbsp;</label>
+                      <div class="input-group">
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive mt-5">
+            <table class="table user-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Nhân viên</th>
+                  <th>Thu nhập chịu thuế</th>
+                  <th>Giờ công định mức</th>
+                  <th>Giờ công thực tế</th>
+                  <th>Thuế</th>
+                  <th>Bảo hiểm</th>
+                  <th>Tạm ứng</th>
+                  <th>Thưởng</th>
+                  <th>Thực nhận</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="salary in salaries">
+                  <!-- <td>{{$index + 1}}</td>
+                                    <td>{{salary.user.name}}</td>
+                                    <td>{{salary.gross | number}}đ</td>
+                                    <td>{{salary.required_time}}</td>
+                                    <td>{{salary.total_time}}</td>
+                                    <td>{{salary.tax | number}}đ</td>
+                                    <td>{{salary.insurance | number}}đ</td>
+                                    <td>{{salary.advance_payment | number}}đ</td>
+                                    <td>{{salary.reward | number}}đ</td>
+                                    <td>{{salary.net | number}}đ</td> -->
+                </tr>
+                <tr ng-if="salaries.length === 0">
+                  <td colspan="10">
+                    Chưa có dữ liệu lương tháng này. Vui lòng bấm nút tính lương
+                    để tính toán.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination justify-content-center">
+            <ul class="pagination">
+              <li class="page-item" ng-class="{ disabled: currentPage === 1 }">
+                <a class="page-link" href="#" ng-click="prevPage()">Previous</a>
+              </li>
+              <li
+                class="page-item"
+                ng-repeat="page in pages"
+                ng-class="{ active: currentPage === page }"
+              >
+                <a class="page-link" href="#" ng-click="setPage(page)">{{
+                  pages
+                }}</a>
+              </li>
+              <li
+                class="page-item"
+                ng-class="{ disabled: currentPage === totalPages }"
+              >
+                <a class="page-link" href="#" ng-click="nextPage()">Next</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  angular.module("salaryApp", []).controller("SalaryController", [
+    "$scope",
+    "$http",
+    function ($scope, $http) {
+      $scope.searchParams = {
+        time: "",
+      };
+
+      $scope.currentPage = 1;
+      $scope.pageSize = 10;
+
+      $scope.search = function () {
+        $http
+          .get("/salaries", { params: $scope.searchParams })
+          .then(function (response) {
+            $scope.salaries = response.data;
+          });
+      };
+
+      $scope.prevPage = function () {
+        if ($scope.currentPage > 1) {
+          $scope.currentPage--;
+          $scope.search();
+        }
+      };
+
+      $scope.nextPage = function () {
+        if ($scope.currentPage < $scope.totalPages) {
+          $scope.currentPage++;
+          $scope.search();
+        }
+      };
+
+      $scope.setPage = function (page) {
+        $scope.currentPage = page;
+        $scope.search();
+      };
+
+      $scope.init = function () {
+        $scope.search();
+      };
+
+      $scope.init();
+    },
+  ]);
+</script>

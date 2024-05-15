@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <header class="header text-white d-flex justify-content-between">
+      <h2 class="header-title"></h2>
+      <span style="color:white;padding-left : 700px;" class="username">Welcome , {{ userResponse?.username }}!</span>
+      <!-- Logout Button -->
+      <button class="btn btn-danger btn-sm" (click)="logout()">Logout</button>
+    </header>
+    <div class="row">
+      <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block bg-light sidebar">
+        <div class="position-sticky">
+          <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-light" (click)="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h3 class="ml-2" [class.hide]="!sidebarExpanded">Menu</h3>
+        </div>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" 
+                (click)="showAdminComponent('about')">
+                <i class="fab fa-first-order icon"></i>Tổng quan
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" 
+                (click)="showAdminComponent('employees')">
+                <i class="fab fa-canadian-maple-leaf icon"></i>Nhân viên
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" 
+                (click)="showAdminComponent('remotes')">
+                <i class="fab fa-codepen icon"></i>Làm việc từ xa
+                <span class="badge badge-danger" data-toggle="tooltip" title="Số đơn chưa duyệt" >{{ numberOfPendingRequests }}
+                </span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" 
+                  (click)="showAdminComponent('overtimes')">
+                  <i class="fab fa-codepen icon"></i>Làm việc ngoài giờ
+                  <span class="badge badge-danger" data-toggle="tooltip" title="Số đơn chưa duyệt" >{{ numberOfPendingRequests }}
+                  </span>
+
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" 
+                  (click)="showAdminComponent('leaves')">
+                  <i class="fab fa-codepen icon"></i>Xin nghỉ phép
+                  <span class="badge badge-danger" data-toggle="tooltip" title="Số đơn chưa duyệt" >{{ numberOfPendingRequests }}
+                  
+                </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" 
+                  (click)="showAdminComponent('timekeeps')">
+                  <i class="fab fa-codepen icon"></i>Chấm công
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" 
+                  (click)="showAdminComponent('news')">
+                  <i class="fab fa-codepen icon"></i>Tin tức
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" 
+                  (click)="showAdminComponent('payroll')">
+                  <i class="fab fa-codepen icon"></i>Lương
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" 
+                  (click)="showAdminComponent('reports')">
+                  <i class="fab fa-codepen icon"></i>Báo cáo
+                </a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="col-md-10 col-lg-10 overflow-auto" style="max-height: 80vh;">
+        <!--
+        <ng-container [ngSwitch]="adminComponent">
+          <app-order-admin *ngSwitchCase="'orders'"></app-order-admin>
+          <app-product-admin *ngSwitchCase="'products'"></app-product-admin>
+          <app-category-admin *ngSwitchCase="'categories'"></app-category-admin>                    
+        </ng-container>
+        -->
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

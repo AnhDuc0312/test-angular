@@ -1,0 +1,50 @@
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Ensure it's above other content */
+    padding: 48px 0 0; /* Adjust as needed */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  /* Sidebar navigation links */
+  .nav-link {
+    color: #333;
+  }
+  
+  .nav-link:hover {
+    color: #007bff;
+  }
+  
+  /* Main content */
+  .main-content {
+    margin-left: 240px; /* Same as sidebar width */
+  }
+  
+  /* Page header */
+  .page-header {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Buttons */
+  .btn-share, .btn-export {
+    margin-right: 8px;
+  }
+  
+  /* Table */
+  .table {
+    width: 100%;
+  }
+  
+  /* Custom scrollbar for sidebar */
+  .sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  

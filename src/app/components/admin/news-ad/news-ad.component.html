@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">News Management</h2>
+
+  <div class="card">
+    <div class="card-body">
+      <button class="btn btn-primary mb-3" (click)="addNews()">Add News</button>
+
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let news of editedNewsList; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ news.title }}</td>
+                    <td>
+                      <ckeditor [editor]="Editor" [data]="news.content" [disabled]="!news.isEditing" (blur)="onContentBlur($event, news)"></ckeditor>
+                    </td>
+                    <td>
+                      <button *ngIf="!news.isEditing" class="btn btn-primary" (click)="news.isEditing = true">Edit</button>
+                      <button *ngIf="news.isEditing" class="btn btn-success" (click)="editNews(news.id, news.content); news.isEditing = false;">Save</button>
+                      <button class="btn btn-danger" (click)="deleteNews(news.id)">Delete</button>
+                    </td>
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+/* Add styles for the .news-card class */
+.news-card {
+    flex: 1; /* Make cards flexible */
+    max-width: 500px; /* Set a maximum width */
+    margin: 10px; /* Add spacing between cards */
+  }
+  
+  .card-body {
+    min-height: 150px; /* Set a minimum height for the card body */
+    max-height: 150px;
+  }
+
+  .show-more-button{
+    border-radius: 0.6rem;
+  }

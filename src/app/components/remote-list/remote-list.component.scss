@@ -1,0 +1,115 @@
+/* CSS cho phần input và button */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.custom-table th {
+  background-color: #f2f2f2;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.custom-table tr:hover {
+  background-color: #ddd;
+}
+
+.custom-table tfoot td {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.create-form {
+  height: 50px;
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-create {
+  font-size: 20px;
+  border-radius: 0.5rem;
+  padding: 10px;
+  height: 40px;
+  width: 200px;
+
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+  margin: 40px;
+}
+.search-time {
+  margin: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.search-time input[type="date"] {
+  margin-right: 30px; /* Khoảng cách giữa ô input và nút */
+  border: 1px solid #ccc; /* Đường viền ô input */
+  border-radius: 5px; /* Độ cong của góc */
+  font-size: 14px; /* Kích thước chữ */
+  text-align: center;
+}
+
+.search-time button {
+  padding: 10px 20px; /* Kích thước của nút */
+  background-color: #007bff; /* Màu nền */
+  color: #fff; /* Màu chữ */
+  border: none; /* Không có đường viền */
+  border-radius: 5px; /* Độ cong của góc */
+  cursor: pointer; /* Chỉ số để biểu thị nút có thể nhấn được */
+  font-size: 14px; /* Kích thước chữ */
+}
+
+.search-time button:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+}
+.search-time input[type="date"],
+.search-time button {
+  flex: 1; /* Các phần tử sẽ chia đều không gian */
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  margin: 0 10px;
+}

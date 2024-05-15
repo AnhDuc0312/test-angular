@@ -1,0 +1,31 @@
+<app-header></app-header>
+<div class="container">
+  <div style="margin: 60px; text-align: center; font-size : 20px">LỊCH LÀM VIỆC </div>
+  <div class="calendar">
+    <div class="header">
+      <button (click)="previousMonth()">Previous</button>
+      <h2>{{ currentMonth }} {{ currentYear }}</h2>
+      <button (click)="nextMonth()">Next</button>
+    </div>
+    <div class="days-header">
+      <span>Mon</span>
+      <span>Tue</span>
+      <span>Wed</span>
+      <span>Thu</span>
+      <span>Fri</span>
+      <span>Sat</span>
+      <span>Sun</span>
+    </div>
+    <div class="days">
+      <ng-container *ngFor="let row of calendarDays">
+        <div class="week">
+          <ng-container *ngFor="let day of row" class="day" [ngClass]="{ 'weekend': day.isWeekend }">
+            <span class="day-number">{{ day.date }}</span>
+            <span class="day-label">{{ day.isWeekend ? 'Weekend' : 'Working Day' }}</span>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

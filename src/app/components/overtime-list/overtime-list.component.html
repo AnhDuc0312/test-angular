@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="container">
+  <div class="create-form">
+    <button class="btn-create" (click)="navigateToOtherPage()" >Đăng kí</button>
+  </div>
+  <div class="title">
+    THÔNG TIN LÀM VIỆC TỪ XA CỦA TÔI
+  </div>
+  <div class="search-time">
+      <input type="date" [(ngModel)]="startDate">
+      <div>to</div>
+      <input type="date" [(ngModel)]="endDate">
+      <button (click)="filterByDateRange()">Tìm kiếm</button>
+  </div>
+  
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Thời gian bắt đầu</th>
+        <th>Thời gian kết thúc</th>
+        <th>Công việc</th>
+        <th>Thời gian làm (giờ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registration of overtimes">
+        <td>{{ registration.user.username }}</td>
+        <td>{{ parseStringToDateTime(registration.fromDatetime) }}</td>
+        <td>{{ parseStringToDateTime(registration.toDatetime)}}</td>
+        <td>{{ registration.comment }}</td>
+        <td>{{ registration.workedHours }}</td>
+      </tr>
+      <tr>
+        <td colspan="4">Tổng thời gian làm trong tháng:</td>
+        <td>{{ totalWorkHours }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>{{ currentPage }}/{{ getTotalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next</button>
+  </div>
+  
+</div>
+<app-footer></app-footer>

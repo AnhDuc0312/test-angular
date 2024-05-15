@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="container">
+    <h2>Biểu mẫu xin nghỉ phép</h2>
+    <form (ngSubmit)="submitForm()">
+        <div class="form-group">
+            <label for="plan" class="plan">Kế hoạch </label>
+            <select id="plan" name="plan" [(ngModel)]="plan">
+                <option value="da-thong-qua">Đã thông qua quản lý</option>
+                <option value="chua-thong-qua">Chưa thông qua quản lý</option>
+            </select>
+        </div>
+        <div class="form-group time">
+            <div>
+                <label for="time" class="w-100">Thời gian </label>
+            </div>
+            <div class="date-time">
+                <div>
+                    <label for="date" class="date">Ngày:</label>
+                    <input type="date" id="date" name="date" [(ngModel)]="date">
+                </div>
+                <div>
+                    <label for="startTime" class="date">Thời gian bắt đầu:</label>
+                    <input type="time" id="startTime" name="startTime" [(ngModel)]="startTime">
+                </div>
+                <div>
+                    <label for="endTime" class="date">Thời gian kết thúc:</label>
+                    <input type="time" id="endTime" name="endTime" [(ngModel)]="endTime">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="reason">Lý do:</label>
+            <textarea id="reason" name="reason" [(ngModel)]="reason" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="task">Công việc sẽ làm:</label>
+            <textarea id="task" name="task" [(ngModel)]="task" rows="4"></textarea>
+        </div>
+        <div class="buttons">
+            <button type="submit" >Tạo</button>
+            <button type="button" (click)="cancel()">Hủy</button>
+        </div>
+    </form>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,227 @@
+<!-- employee-management.component.html -->
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Employee Management</h2>
+    
+    <!-- Employee summary -->
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Employee Summary</h5>
+            <div class="row">
+              <div class="col">
+                  <p>Total Employees: {{ employees.length }}</p>
+              </div>
+              <div class="col">
+                  <p>Total Departments: {{ totalDepartments }}</p>
+              </div>
+              <div class="col">
+                  <p>Employees Working: {{ employees.length }}</p>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Search -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Search by ID, Name, Department, Position" >
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="searchEmployees()">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <button class="add-employee" (click)="openModal()">Thêm mới nhân viên</button>
+      </div>
+    </div>
+    
+    <!-- Employee Table -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Position</th>
+              <th scope="col">Education</th>
+              <th scope="col">Department</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let employee of employees; let i = index">
+            <tr>
+              <td>{{i + 1}}</td>
+              <td>{{ employee.full_name}}</td>
+              <td>{{ employee.username}}</td>
+              <td>{{ employee.position }}</td>
+              <td>{{ employee.education }}</td>
+              <td>{{ employee.department }}</td>
+              <td>
+                <button class="btn btn-primary" (click)="toggleDetails(i)">View Details</button>
+              </td>
+            </tr>
+            <tr *ngIf="selectedRow === i">
+              <td colspan="12">
+                <div class="employee-details">
+                  <div class="card">
+                    <div class="card-body">
+                      <form>
+                        <div class="row mt-3">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Company (disabled)</label>
+                              <input type="text" class="form-control" placeholder="Company" disabled [value]="company">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Username</label>
+                              <input type="text" class="form-control" placeholder="Username" disabled [value]="employee.username">
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                          <div class="col-md-5">
+                            <div class="form-group">
+                              <label>Họ và tên</label>
+                              <input type="text" class="form-control" placeholder="Họ và tên" disabled [value]="employee.full_name">
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label>Ngày sinh</label>
+                              <input type="text" class="form-control" placeholder="ngày sinh" disabled [value]="parseStringToDate(employee.date_of_birth)">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Giới tính</label>
+                              <input type="gender" class="form-control" placeholder="Giới tính" disabled [value]="employee.gender">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <!-- Phone -->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Số điện thoại</label>
+                              <input type="phone" class="form-control" placeholder="Số điện thoại" disabled [value]="employee.phone_number">
+                            </div>
+                          </div>
+                          <!-- Email -->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input type="email" class="form-control" placeholder="Email address" disabled [value]="employee.email">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <!-- Thời gian bắt đầu -->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Thời gian bắt đầu</label>
+                              <input type="text" class="form-control" placeholder="Thời gian bắt đầu" disabled [value]="parseStringToDate(employee.contact_start_date)">
+                            </div>
+                          </div>
+                          <!-- Thời gian kết thúc -->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Thời gian kết thúc</label>
+                              <input type="text" class="form-control" placeholder="Thời gian kết thúc" disabled [value]="parseStringToDate(employee.contact_end_date)">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <!-- học vấn -->
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Trình độ học vấn</label>
+                              <input type="text" class="form-control" placeholder="Trình độ học vấn" disabled [value]="employee.education">
+                            </div>
+                          </div>
+                          <!-- vị trí -->
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Vị trí làm việc</label>
+                              <input type="text" class="form-control" placeholder="Trình độ học vấn" disabled [value]="employee.position">
+                            </div>
+                          </div>
+                          <!-- phòng ban -->
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Phòng ban</label>
+                              <input type="text" class="form-control" placeholder="Phòng ban" disabled [value]="employee.department">
+                            </div>
+                          </div>
+                        </div>
+                        
+                        
+                      </form>
+                    </div>
+                  </div>
+                
+                  <button class="btn btn-update" (click)="toggleDetails(i)">Thay đổi</button>
+                 
+                  <button class="btn btn-update" (click)="resetPassword(i)">Reset Password</button>
+                  <button class="btn btn-delete" (click)="delete(i)">Xóa</button>
+                  <!-- Thêm các trường thông tin khác cần hiển thị -->
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <nav aria-label="Page navigation">
+              <ul class="pagination">
+                  <li class="page-item" *ngIf="currentPage > 1">
+                      <a class="page-link" 
+                      (click)="onPageChange(1)">First</a>
+                  </li>
+                  <li class="page-item" *ngIf="currentPage > 1">
+                      <a class="page-link" 
+                      (click)="onPageChange(currentPage - 1)">Previous</a>
+                  </li>
+                  <ng-container *ngFor="let page of visiblePages">
+                      <li class="page-item" [ngClass]="{'active': page === currentPage}">
+                          <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+                      </li>
+                  </ng-container>
+                  <li class="page-item" *ngIf="currentPage < totalPages">
+                      <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+                  </li>
+                  <li class="page-item" *ngIf="currentPage < totalPages">
+                      <a class="page-link" (click)="onPageChange(totalPages)">Last</a>
+                  </li>
+              </ul>
+          </nav>
+      </div>
+      </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" *ngFor="let page of pages" [class.active]="currentPage === page">
+              <a class="page-link" href="#" (click)="changePage(page)">{{ page }}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  

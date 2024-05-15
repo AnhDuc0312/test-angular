@@ -1,0 +1,174 @@
+<app-header></app-header>
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-danger text-white">
+          <h4 class="card-title">Edit Profile</h4>
+          <p class="card-category">Complete your profile</p>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Company (disabled)</label>
+                  <input type="text" class="form-control" placeholder="Company" disabled [value]="company">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" placeholder="Username" disabled  [(ngModel)]="employees.username" name="username">
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label>Họ và tên</label>
+                  <input type="text" class="form-control" placeholder="Họ và tên" disabled [(ngModel)]="employees.full_name" name="full_name">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Ngày sinh</label>
+                  <input type="text" class="form-control" placeholder="ngày sinh" disabled [value]="parseStringToDate(employees.date_of_birth)" name="date_of_birth">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Giới tính</label>
+                  <input type="gender" class="form-control" placeholder="Giới tính" disabled [value]="employees.gender" name="gender">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <!-- Phone -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Số điện thoại</label>
+                  <input type="phone" class="form-control" placeholder="Số điện thoại" [disabled]="!isEditing" [(ngModel)]="employees.phone_number" name="phone_number">
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" placeholder="Email address" [disabled]="!isEditing" [(ngModel)]="employees.email" name="email">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div>
+                <div class="form-group">
+                  <label>Địa chỉ</label>
+                  <input type="text" class="form-control" placeholder="Address" [disabled]="!isEditing" [(ngModel)]="employees.address" name="address">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <!-- Thời gian bắt đầu -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Thời gian bắt đầu</label>
+                  <input type="text" class="form-control" placeholder="Thời gian bắt đầu" disabled [value]="parseStringToDate(employees.contact_start_date)" name="contact_start_date">
+                </div>
+              </div>
+              <!-- Thời gian kết thúc -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Thời gian kết thúc</label>
+                  <input type="text" class="form-control" placeholder="Thời gian kết thúc" disabled [value]="parseStringToDate(employees.contact_end_date)" name="contact_end_date">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <!-- học vấn -->
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Trình độ học vấn</label>
+                  <input type="text" class="form-control" placeholder="Trình độ học vấn" disabled [value]="employees.education" name="education">
+                </div>
+              </div>
+              <!-- vị trí -->
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Vị trí làm việc</label>
+                  <input type="text" class="form-control" placeholder="Trình độ học vấn" disabled [value]="employees.position" name="position">
+                </div>
+              </div>
+              <!-- phòng ban -->
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Phòng ban</label>
+                  <input type="text" class="form-control" placeholder="Phòng ban" disabled [value]="employees.department" name="department">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Trợ cấp</label>
+                  <input type="text" class="form-control" placeholder="Trợ cấp" disabled [value]="employees.allowance" name="allowance">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Lương cơ bản</label>
+                  <input type="text" class="form-control" placeholder="Lương cơ bản" disabled [value]="employees.hourly_wage" name="hourly_wage">
+                </div>
+              </div>
+              <div class="col-md-4"></div>
+            </div>
+            <div class="row mt-3">
+              <!-- Other form fields -->
+              <button type="button" class="btn btn-danger pull-right" (click)="toggleEditing()">{{ isEditing ? 'Cập nhập' : 'Thay đổi' }}</button>
+            <div class="clearfix"></div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-profile d-flex justify-content-center">
+        <div class="card-avatar mt-3 mb-3 d-flex justify-content-center ">
+          <img width="70px" height="100px" class="img" src="../../assets/images/IMG_8835.JPG" />
+        </div>
+        <div class="card-body mb-3 d-flex justify-content-center flex-column align-items-center">
+          <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+          <h4 class="card-title">Alec Thompson</h4>
+          <p class="card-description">
+            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+          </p>
+          <button class="btn btn-danger btn-round">Follow</button>
+        </div>
+      </div>
+      <div class="card card-profile d-flex justify-content-center mt-3">
+        <div class="card-body mb-3 d-flex justify-content-center flex-column align-items-center">
+          <h4 class="card-title">Đổi mật khẩu</h4>
+          <form (ngSubmit)="changePassword()">
+            <div class="form-group">
+              <label for="currentPassword">Mật khẩu hiện tại:</label>
+              <input type="password" class="form-control" id="currentPassword" name="currentPassword" [(ngModel)]="currentPassword" required>
+            </div>
+            <div class="form-group">
+              <label for="newPassword">Mật khẩu mới:</label>
+              <input type="password" class="form-control" id="newPassword" name="newPassword" [(ngModel)]="newPassword" required>
+            </div>
+            <div class="form-group">
+              <label for="confirmNewPassword">Nhập lại mật khẩu mới:</label>
+              <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" [(ngModel)]="confirmNewPassword" required>
+            </div>
+            <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+<app-footer></app-footer>
