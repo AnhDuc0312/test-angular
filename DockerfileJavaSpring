@@ -1,0 +1,25 @@
+#Build
+FROM maven:3.8.4-openjdk-17-slim AS build
+WORKDIR /app
+COPY sys /app/sys
+RUN mvn package -f /app/sys/pom.xml
+
+#multi-staging
+FROM openjdk:17-slim  
+WORKDIR /app
+COPY --from=build /app/sys/target/sys-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/sys/upload upload
+
+EXPOSE 8070
+CMD ["java","-jar","app.jar"]
+
+
+#docker build -t hrms-spring:1.0.1 -f ./DockerfileJavaSpring 
+#docker login
+#create anhduc12/hrms-spring:1.0.0 repository on DockerHub
+#docker tag hrms-spring:1.0.0 anhduc12/hrms-spring:1.0.0
+#docker push anhduc12/hrms-spring:1.0.0
+
+
+
+
